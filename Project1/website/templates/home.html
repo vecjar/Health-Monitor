@@ -1,0 +1,24 @@
+{% extends "base.html" %} {% block title %}Health Monitoring System{% endblock %} {% block content
+    %}
+    <h1 align="center">Medical History of {{user.first_name}} {{user.last_name}}</h1>
+    <table width="60%">
+    <td><b> Date </b></td><td><b>  Notes </b></td>
+      {% for note in user.notes %}
+      <tr>
+       <td>{{ note.date.strftime('%Y-%m-%d') }} </td><td> {{ note.data }}</td>
+        <td>
+        <button type="button" class="close" onClick="deleteNote({{ note.id }})">
+         <span aria-hidden="true">&times;</span>
+        </button>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    <form method="POST">
+      <textarea name="note" id="note" class="form-control"placeholder="Enter new data here"></textarea>
+      <br />
+      <div align="center">
+        <button type="submit" class="btn btn-primary">Add Note</button>
+      </div>
+    </form>
+    {% endblock %}
